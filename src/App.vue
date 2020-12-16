@@ -22,13 +22,13 @@
   export default {
     data() {
       return {
-        isReload: true
+        isReload: true,
       }
     },
     
     provide() {
       return {
-        reload: this.reload
+        reload: this.reload,
       }
     },
     components:{
@@ -36,13 +36,13 @@
       Footer
     },
     methods: {
-      //reload
+      //刷新
       reload(){
         this.isReload = false;
         this.$nextTick(function(){
           this.isReload = true;
         })
-      },
+      }
     }
   }
 </script>

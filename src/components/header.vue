@@ -11,7 +11,7 @@
          >
         <el-menu-item class="logo hidden-xs-only" index="/"><el-image :src="src"></el-image></el-menu-item>
         <el-menu-item index="/index">首页</el-menu-item>
-        <el-menu-item class="hidden-xs-only" index="/category">分类</el-menu-item>
+        <el-menu-item class="hidden-xs-only" index="/category/1">分类</el-menu-item>
         <el-menu-item class="hidden-xs-only" index="/timeline">时间线</el-menu-item>
         <el-menu-item class="hidden-xs-only" index="/messageboard">留言板</el-menu-item>
 
@@ -46,7 +46,7 @@
           active-text-color="#ffd04b"
           router
           >
-            <el-menu-item index="/category">分类</el-menu-item>
+            <el-menu-item index="/category/1">分类</el-menu-item>
             <el-menu-item index="/timeline">时间线</el-menu-item>
             <el-menu-item index="/messageboard">留言板</el-menu-item>
             <div class="drawer-search">
@@ -187,7 +187,6 @@ export default {
         dialog: false,
       }
     },
-    inject: ["reload"],
     created(){
     },
     mounted () {

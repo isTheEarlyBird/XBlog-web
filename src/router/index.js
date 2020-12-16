@@ -15,12 +15,12 @@ const routes = [
     component: () => import('@/components/App-body.vue')
   },
   {
-    path: '/article',
+    path: '/article/:articleId',
     name: 'Article',
     component: () => import('../views/article.vue')
   },
   {
-    path: '/category',
+    path: '/category/:categoryId',
     name: 'Category',
     component: () => import('../views/category.vue')
   },
