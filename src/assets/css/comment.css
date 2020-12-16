@@ -1,0 +1,42 @@
+.write-comment .post-comment {
+    margin-top: 1rem;
+    height: 50px;
+}
+.showComment {
+    width: 100%;
+}
+.showComment .comment-item {
+    
+    padding: 10px 0;
+    box-sizing: content-box;
+    border-bottom: 1px solid #6666665e;
+}
+.showComment .comment, .showComment li  {
+    height: 25px;
+    line-height: 25px;
+}
+.showComment li {
+    float: left;
+}
+.showComment .el-avatar {
+    width: 25px;
+    height: 25px;
+}
+.showComment .comment-username span:hover {
+    color: red;
+}
+
+.showComment .text {
+    color: rgba(110, 110, 109, 0.712);
+    font-size: 14px;
+}
+.showComment .copmment-reply-btn {
+    color: skyblue;
+}
+
+.showComment .reply {
+    margin-left: 40px;
+}
+.showComment .reply li {
+    margin-top: 10px;
+}
