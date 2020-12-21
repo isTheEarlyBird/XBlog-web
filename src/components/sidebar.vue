@@ -5,21 +5,12 @@
             <div slot="header" class="clearfix">
                 <span>推荐文章</span>
             </div>
-            <div class="text item">
-                <router-link :to="{name:'Article', params: {id:1}}">springboot如何学习</router-link>
+            
+            <div class="text item" v-for="(article, index) in sidebar.recommendArticles" :key="index">
+                <router-link :to="{name:'Article', params: {articleId:article.id}}">{{article.title}}</router-link>
             </div>
-            <div class="text item">
-                <a href="">springboot如何学习倒萨倒萨倒萨倒萨倒萨倒萨大大撒打算dsadsds</a>
-            </div>
-            <div class="text item">
-                <a href="">springboot如何学习倒萨倒萨倒萨倒萨倒萨倒萨大大撒打算dsadsds</a>
-            </div>
-            <div class="text item">
-                <a href="">springboot如何学习倒萨倒萨倒萨倒萨倒萨倒萨大大撒打算dsadsds</a>
-            </div>
-            <div class="text item">
-                <a href="">springboot如何学习倒萨倒萨倒萨倒萨倒萨倒萨大大撒打算dsadsds</a>
-            </div>
+            
+            
             
         </el-card>
         
@@ -27,21 +18,10 @@
             <div slot="header" class="clearfix">
                 <span>分类</span>
             </div>
-            <div class="text item">
-                <a href="">springboot</a>
+            <div class="text item" v-for="(category, index) in sidebar.categorys" :key="index">
+                <router-link :to="{name:'Category', params: {categoryId:category.id}}">{{category.name}}</router-link>
             </div>
-            <div class="text item">
-                <a href="">springdsadsds</a>
-            </div>
-            <div class="text item">
-                <a href="">dsadsds</a>
-            </div>
-            <div class="text item">
-                <a href="">java</a>
-            </div>
-            <div class="text item">
-                <a href="">c</a>
-            </div>
+            
             
         </el-card>
     </el-col>
@@ -74,3 +54,12 @@
     }
    
 </style>
+<script>
+export default {
+    props: ['sidebar'],
+    data() {
+        return {
+        }
+    }
+}
+</script>

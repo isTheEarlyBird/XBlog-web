@@ -14,6 +14,7 @@
         <el-menu-item class="hidden-xs-only" index="/category/1">分类</el-menu-item>
         <el-menu-item class="hidden-xs-only" index="/timeline">时间线</el-menu-item>
         <el-menu-item class="hidden-xs-only" index="/messageboard">留言板</el-menu-item>
+<el-menu-item index="/writeArticle">写博客</el-menu-item>
 
         <el-menu-item class="hidden-xs-only right">
           <div class="user-info">

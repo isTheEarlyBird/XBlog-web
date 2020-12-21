@@ -89,10 +89,10 @@ export default {
     Sidebar
   },
   data() {
-      return {
-        src: require("@/assets/images/1.jpg"),
-        src2: require("@/assets/images/2.jpg"),
-      }
-    },
+    return {
+      src: require("@/assets/images/1.jpg"),
+      src2: require("@/assets/images/2.jpg"),
+    }
+  },
 }
 </script>

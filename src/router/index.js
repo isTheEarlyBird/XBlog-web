@@ -34,6 +34,11 @@ const routes = [
     name: 'Messageboard',
     component: () => import('../views/messageboard.vue')
   },
+  {
+    path: '/writeArticle',
+    name: 'WriteArticle',
+    component: () => import('../views/writeArticle.vue')
+  },
 ]
 
 const router = new VueRouter({
