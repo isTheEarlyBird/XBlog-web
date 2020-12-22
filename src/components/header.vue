@@ -6,7 +6,7 @@
         :mode="mode"
         :background-color="bgc"
         text-color="#fff"
-        active-text-color="#ffd04b"
+        active-text-color="#fff"
         router
          >
         <el-menu-item class="logo hidden-xs-only" index="/"><el-image :src="src"></el-image></el-menu-item>
@@ -14,7 +14,7 @@
         <el-menu-item class="hidden-xs-only" index="/category/1">分类</el-menu-item>
         <el-menu-item class="hidden-xs-only" index="/timeline">时间线</el-menu-item>
         <el-menu-item class="hidden-xs-only" index="/messageboard">留言板</el-menu-item>
-<el-menu-item index="/writeArticle">写博客</el-menu-item>
+        <el-menu-item index="/writeArticle">写博客</el-menu-item>
 
         <el-menu-item class="hidden-xs-only right">
           <div class="user-info">
@@ -63,6 +63,15 @@
     
 </template>
 <style scoped lang="less">
+  // 去除导航栏下划线
+  .el-menu--horizontal > .el-menu-item {
+    border-bottom: none;
+  }
+  .el-menu--horizontal > .el-menu-item.is-active {
+    border-bottom: none;
+  }
+
+
    #app .header {
     height: 60px;
     line-height: 60px;

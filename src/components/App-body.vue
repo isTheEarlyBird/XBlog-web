@@ -47,7 +47,6 @@
                     
                 </div>
                 <div class="block">
-                    <span class="demonstration">调整每页显示条数</span>
                     <el-pagination
                     @size-change="handleSizeChange"
                     @current-change="handleCurrentChange"
@@ -56,7 +55,7 @@
                     :page-size.sync = "pageSize"
                     
                     layout="sizes, prev, pager, next"
-                    :total="1000">
+                    :total="pageInfo.total">
                     </el-pagination>
                 </div>
             </div>

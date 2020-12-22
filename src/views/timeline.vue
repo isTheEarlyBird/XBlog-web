@@ -2,29 +2,20 @@
   <div class="timeline">
     <div class="block">
       <el-timeline>
-        <el-timeline-item timestamp="2018/4/12" placement="top">
+        <el-timeline-item timestamp="2018/4/12" placement="top" v-for="(article, index) in articles" :key="index">
           <el-card>
-            <div class="title"><h4><router-link to="">我是title</router-link></h4></div>
-            <div class="summary"><p>我是摘要</p></div>
+            <div class="title"><h4><router-link :to="{path: '/article/'+article.id}">{{article.title}}e</router-link></h4></div>
+            <div class="summary"><p>{{article.summary}}</p></div>
             <div class="category">
-              <router-link to="/category/1" class="category_btn">spring</router-link>
-              <router-link to="/category/2" class="category_btn">springboot</router-link>
-              <router-link to="/category/3" class="category_btn">java</router-link>
+              <template v-for="(category, index2) in article.categorys">
+                <router-link :to="{path: '/category/'+ category.id}" class="category_btn"  :key="index2">
+                    {{category.name}}
+                </router-link>
+              </template>
             </div>
           </el-card>
         </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/3" placement="top">
-          <el-card>
-            <h4>更新 Github 模板</h4>
-            <p>王小虎 提交于 2018/4/3 20:46</p>
-          </el-card>
-        </el-timeline-item>
-        <el-timeline-item timestamp="2018/4/2" placement="top">
-          <el-card>
-            <h4>更新 Github 模板</h4>
-            <p>王小虎 提交于 2018/4/2 20:46</p>
-          </el-card>
-        </el-timeline-item>
+        
       </el-timeline>
     </div>
 
@@ -82,7 +73,20 @@ export default {
   },
   data() {
     return {
+      articles: {}
     }
   },
+  mounted() {
+    this.findArticleByID();
+  },
+  methods: {
+    //获取文章
+    findArticleByID() {
+      this.$axios.get("/article/findArticleByID/0")
+      .then(response => {
+          this.articles = response.data.data.articles;
+      });
+    }
+  }
 }
 </script>
