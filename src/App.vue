@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div class="body">
+    <div class="body" v-cloak>
         <el-row type="flex" justify="center">
             <el-col :span="16" :xs="24">
               <router-view v-if="isReload"/>

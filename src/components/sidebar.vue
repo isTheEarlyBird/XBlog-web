@@ -21,8 +21,6 @@
             <div class="text item" v-for="(category, index) in sidebar.categorys" :key="index">
                 <router-link :to="{name:'Category', params: {categoryId:category.id}}">{{category.name}}</router-link>
             </div>
-            
-            
         </el-card>
     </el-col>
 </template>

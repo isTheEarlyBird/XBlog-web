@@ -12,7 +12,7 @@
                     <el-row type="flex" :gutter="20">
                         <el-col :span="8" :xs="0">
                             <div class="item_img">
-                                <el-image :src="src2" lazy></el-image>
+                                <el-image :src="require('../' + article.cover)" lazy></el-image>
                             </div>
                         </el-col>
                         <el-col :span="16" :xs="24">
@@ -92,7 +92,6 @@
             currentPage: 0,
             pageSize: 10,
             src: require("@/assets/images/1.jpg"),
-            src2: require("@/assets/images/2.jpg"),
         }
     },
     mounted() {

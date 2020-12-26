@@ -7,12 +7,12 @@ const routes = [
   {
     path: '/',
     name: '/',
-    component: () => import('@/components/App-body.vue')
+    component: () => import('@/components/home.vue')
   },
   {
     path: '/index',
     name: '/Index',
-    component: () => import('@/components/App-body.vue')
+    component: () => import('@/components/home.vue')
   },
   {
     path: '/article/:articleId',

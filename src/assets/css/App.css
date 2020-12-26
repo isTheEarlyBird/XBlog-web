@@ -5,7 +5,9 @@ body {
     text-align: center;
     background-color: rgba(233, 233, 233, 0.815);
 }
-
+[v-cloak] {
+    display: none;
+}
 .body {
     min-height: 650px;
     margin-top: 20px;

@@ -82,7 +82,7 @@ export default {
   methods: {
     //获取文章
     findArticleByID() {
-      this.$axios.get("/article/findArticleByID/0")
+      this.$axios.get("/article/listArticleByUserId/0")
       .then(response => {
           this.articles = response.data.data.articles;
       });
