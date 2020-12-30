@@ -61,7 +61,7 @@
             </div>
         </el-col>
         <!-- 侧边栏 -->
-        <Sidebar :sidebar="{categorys, recommendArticles}" ></Sidebar>
+        <Sidebar :sidebar="{recommendCategorys, recommendArticles}" ></Sidebar>
     </el-row>
 </template>
 
@@ -86,7 +86,7 @@
   export default {
     data() {
         return {
-            categorys: {},
+            recommendCategorys: {},
             pageInfo:{},
             recommendArticles: {},
             currentPage: 0,
@@ -106,7 +106,7 @@
             this.$axios.get("/home/" + current + "/" + size)
             .then(response => {
                 let homeVO = response.data.data.homeVO;
-                this.categorys = homeVO.categorys;
+                this.recommendCategorys = homeVO.categorys;
                 this.pageInfo = homeVO.pageInfo;
                 this.recommendArticles = homeVO.recommendArticles;
             });

@@ -11,7 +11,7 @@
          >
         <el-menu-item class="logo hidden-xs-only" index="/"><el-image :src="src"></el-image></el-menu-item>
         <el-menu-item index="/index">首页</el-menu-item>
-        <el-menu-item class="hidden-xs-only" index="/category/0">分类</el-menu-item>
+        <el-menu-item class="hidden-xs-only" index="/category/1">分类</el-menu-item>
         <el-menu-item class="hidden-xs-only" index="/timeline">时间线</el-menu-item>
         <el-menu-item class="hidden-xs-only" index="/messageboard">留言板</el-menu-item>
         <el-menu-item index="/writeArticle">写博客</el-menu-item>

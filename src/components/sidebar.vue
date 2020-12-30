@@ -14,13 +14,14 @@
             
         </el-card>
         
-        <el-card class="box-card">
+        <el-card class="box-card"  v-if="JSON.stringify(sidebar.recommendCategorys)=='{}'">
             <div slot="header" class="clearfix">
                 <span>分类</span>
             </div>
-            <div class="text item" v-for="(category, index) in sidebar.categorys" :key="index">
-                <router-link :to="{name:'Category', params: {categoryId:category.id}}">{{category.name}}</router-link>
+            <div class="text item" v-for="(category, index) in sidebar.recommendCategorys" :key="index">
+                <router-link :to="{path: '/category/' + category.id}">{{category.name}}</router-link>
             </div>
+            
         </el-card>
     </el-col>
 </template>

@@ -3,7 +3,7 @@
       <el-col :span="17" :xs="24" :sm="24" :md="17">
         <!-- 选择的分类 -->
         <div class="category">
-          <span @click="clickCategory(index)" :class="{'skyblue': (index == num ? true : false)}" class="pointer" v-for="(category, index) in categorys" :key="index">
+          <span @click="clickCategory(index + 1)" :class="{'skyblue': (index + 1 == num ? true : false)}" class="pointer" v-for="(category, index) in allCategory" :key="index">
             {{category.name}}
           </span>
         </div>
@@ -68,7 +68,7 @@
         </div>
       </el-col>
       <!-- 侧边栏 -->
-      <Sidebar :sidebar="{categorys, recommendArticles}" ></Sidebar>
+      <Sidebar :sidebar="{recommendArticles}" ></Sidebar>
   </el-row>
 </template>
 <style scoped lang="less">
@@ -100,9 +100,9 @@ export default {
   inject: ["reload"],
   data() {
     return {
-      allCategory: {},
-      recommendArticles: {},
-      categorys: {},
+      allCategory: {},//所有分类
+      recommendArticles: {},//推荐文章
+      recommendCategorys: {},//推荐分类
       pageInfo: {
         records: {
           length: ""
@@ -119,13 +119,12 @@ export default {
   },
   methods: {
     //后台交互
-    init(cid, size, current) {
-      this.$axios.get("/category/" + cid + "/" + size +"/"+ current)
+    init(cid, current, size) {
+      this.$axios.get("/category/categorys/" + cid+"/"+ current + "/" + size )
       .then(response => {
         let commonVO = response.data.data.commonVO;
         this.pageInfo = commonVO.pageInfo;
         this.recommendArticles = commonVO.recommendArticles;
-        this.categorys = commonVO.categorys;
         
         this.allCategory = response.data.data.allCategory;
       });

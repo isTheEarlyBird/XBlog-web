@@ -2,9 +2,9 @@
   <div class="timeline">
     <div class="block">
       <el-timeline>
-        <el-timeline-item timestamp="2018/4/12" placement="top" v-for="(article, index) in articles" :key="index">
+        <el-timeline-item :timestamp="article.createTimeVO" placement="top" v-for="(article, index) in articles" :key="index">
           <el-card>
-            <div class="title"><h4><router-link :to="{path: '/article/'+article.id}">{{article.title}}e</router-link></h4></div>
+            <div class="title"><h4><router-link :to="{path: '/article/'+article.id}">{{article.title}}</router-link></h4></div>
             <div class="summary"><p>{{article.summary}}</p></div>
             <div class="category">
               <template v-for="(category, index2) in article.categorys">
