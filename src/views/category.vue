@@ -68,7 +68,7 @@
         </div>
       </el-col>
       <!-- 侧边栏 -->
-      <Sidebar :sidebar="{recommendArticles}" ></Sidebar>
+      <Sidebar :sidebar="{recommendCategorys, recommendArticles}" ></Sidebar>
   </el-row>
 </template>
 <style scoped lang="less">

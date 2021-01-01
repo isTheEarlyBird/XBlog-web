@@ -6,7 +6,7 @@
                 <span>推荐文章</span>
             </div>
             
-            <div class="text item" v-for="(article, index) in sidebar.recommendArticles" :key="index">
+            <div class="word item" v-for="(article, index) in sidebar.recommendArticles" :key="index">
                 <router-link :to="{name:'Article', params: {articleId:article.id}}">{{article.title}}</router-link>
             </div>
             
@@ -14,14 +14,13 @@
             
         </el-card>
         
-        <el-card class="box-card"  v-if="JSON.stringify(sidebar.recommendCategorys)=='{}'">
+        <el-card class="box-card"  v-if="JSON.stringify(sidebar.recommendCategorys)!='{}'">
             <div slot="header" class="clearfix">
                 <span>分类</span>
             </div>
-            <div class="text item" v-for="(category, index) in sidebar.recommendCategorys" :key="index">
+            <div class="word item" v-for="(category, index) in sidebar.recommendCategorys" :key="index">
                 <router-link :to="{path: '/category/' + category.id}">{{category.name}}</router-link>
             </div>
-            
         </el-card>
     </el-col>
 </template>

@@ -2,24 +2,24 @@
   <div class="messageboard" style="min-height:600px;background-color: rgba(255, 255, 255);padding: 20px">
     
     <div class="showComment">
-      <div class="comment-item overflow-hidden"  v-for="(item,index) in commentsList" :key="index">
+      <div class="comment-item overflow-hidden"  v-for="(item,index) in commentList" :key="index">
         <div class="comment">
           <ul>
             <li class="comment-user-profile pointer">
-              <el-avatar :src="require('../' + item.commentUser.userProfilePhoto)"></el-avatar>
+              <el-avatar :src="item.sysUser.avatar"></el-avatar>
             </li>
             <li class="comment-username margin-left-10">
-              <span class="pointer">{{item.commentUser.userName}}</span>
-              <span class="text">：</span>   
+              <span class="pointer">{{item.sysUser.username}}</span>
+              <span class="word">：</span>
             </li>
             <li class="comment-content margin-left-10">
-              <span>{{item.commentContent}}</span>
+              <span>{{item.content}}</span>
             </li>
-            <li class="comment-date text margin-left-10">
-              <span>{{formatTime(item.commentDate)}}</span>
+            <li class="comment-date word margin-left-10">
+              <span>{{formatTime(item.createTimeVO)}}</span>
             </li>
             <li class="copmment-reply-btn margin-left-10">
-              <span @click="openReply(item.commentUser.userId, item.commentId)" class="pointer">回复</span>
+              <span @click="openReply(item.sysUser.id, item.id)" class="pointer">回复</span>
             </li>
           </ul>
         </div>
@@ -27,23 +27,23 @@
           <div v-for="(reply,i) in item.children" :key="i">
             <ul class="overflow-hidden">
               <li class="comment-user-profile pointer">
-                <el-avatar :src="require('../' + reply.replyUser.userProfilePhoto)"></el-avatar>
+                <!-- <el-avatar :src="require('../' + reply.replyUser.avatar)"></el-avatar> -->
               </li>
               <li class="comment-username margin-left-10">
-                <span class="pointer">{{reply.replyUser.userName}}</span>
+                <span class="pointer">{{reply.replyUser.username}}</span>
               </li>
               <li>
-                <span class="text margin-left-10">回复：</span>
-                <span class="margin-left-5">{{reply.commentUser.userName}}</span>
+                <span class="word margin-left-10">回复：</span>
+                <span class="margin-left-5">{{reply.sysUser.username}}</span>
               </li>
               <li class="comment-content margin-left-20">
-                <span>{{reply.commentContent}}</span>
+                <span>{{reply.content}}</span>
               </li>
-              <li class="comment-date text margin-left-10">
-                <span>{{formatTime(reply.commentDate)}}</span>
+              <li class="comment-date word margin-left-10">
+                <span>{{formatTime(reply.createTimeVO)}}</span>
               </li>
               <li class="copmment-reply-btn margin-left-10">
-                <span @click="openReply(reply.replyUser.userId, reply.commentId)" class="pointer">回复</span>
+                <span @click="openReply(reply.replyUser.id, reply.id)" class="pointer">回复</span>
               </li>
             </ul>
           </div>
@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="write-comment">
-      <div style="margin: 100px 0;"></div>
+      <div style="margin: 20px 0;"></div>
       <el-input
         type="textarea"
         placeholder="请输入内容"
@@ -82,7 +82,7 @@ export default {
   },
   data() {
     return {
-      commentsList: {},
+      commentList: {},
       comment: "",
       blogReply: {
         commentUser: {},
@@ -158,25 +158,22 @@ export default {
         inputPattern: /\S/,
         inputErrorMessage: '请填写内容'
       }).then(({ value }) => {
-        this.blogReply = {
-          commentUser: {},
-          replyUser: {}
+        let data = {
+          "commentId": commentId,
+          "content": value,
+          "articleId": 0,
+          "userId": userId,//被回复人的id
+          "replyId": 2//回复人的id
         }
-        this.blogReply.commentId = commentId;
-        this.blogReply.commentUser.userId = userId;//被回复人的id
-        this.blogReply.articleId = 0;
-        this.blogReply.commentContent = value
-        this.blogReply.replyUser.userId = localStorage.getExpire("user").userId//回复人的id
-        
-        this.$axios.post(`/blog-comments/postReply`, JSON.stringify(this.blogReply),
-          {
-            headers: {
-              "Authorization": localStorage.getExpire("token")
-            }
-          }
+        this.$axios.post("/comment/postReply", JSON.stringify(data),
+          // {
+          //   headers: {
+          //     "Authorization": localStorage.getExpire("token")
+          //   }
+          // }
         )
         .then(response => {
-          this.commentsList = response.data.data.commentsList
+          this.commentList = response.data.data.commentList
           this.$message({
             type: 'success',
             message: '评论成功'
@@ -196,21 +193,19 @@ export default {
         })
       }else {
         let data = {
-          "commentUser": {
-            "userId": localStorage.getExpire("user").userId
-          },
+          "userId": 2,
           "articleId": 0,
-          "commentContent": this.comment
+          "content": this.comment
         }
-        this.$axios.post(`/blog-comments/postComment`, JSON.stringify(data),
-          {
-            headers: {
-              "Authorization": localStorage.getExpire("token")
-            }
-          }
+        this.$axios.post(`/comment/postComment`, JSON.stringify(data)
+          // {
+          //   headers: {
+          //     "Authorization": localStorage.getExpire("token")
+          //   }
+          // }
         )
         .then(response => {
-          this.commentsList = response.data.data.commentsList
+          this.commentList = response.data.data.commentList
           //情况评论框内容
           this.comment = ""
           this.$message({
@@ -223,13 +218,11 @@ export default {
   },
   mounted(){
     
-    var $this = this;
-
-    // this.$axios.get(`/blog-articles/findArticleById/watch/0`)
-    // .then(response => {
-    //   this.article = response.data.data.article;
-    //   this.commentsList = response.data.data.commentsList;
-    // });
+    this.$axios.get("/comment/listComment/0")
+    .then(response => {
+      this.commentList = response.data.data.commentList;
+      console.log(this.commentList);
+    });
   },
 }
 </script>
