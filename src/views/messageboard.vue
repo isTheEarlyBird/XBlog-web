@@ -221,7 +221,6 @@ export default {
     this.$axios.get("/comment/listComment/0")
     .then(response => {
       this.commentList = response.data.data.commentList;
-      console.log(this.commentList);
     });
   },
 }

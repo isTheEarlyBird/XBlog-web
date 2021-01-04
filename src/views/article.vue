@@ -9,7 +9,7 @@
         <el-button>{{article.createTimeVO}}</el-button>
       </el-tooltip>
       <span class="views el-icon-view">{{article.views}}</span>
-      <span class="articleLikeCount" :class="chooseLike == true ? 'el-icon-star-on' : 'el-icon-star-off'" @click="clickLike">{{article.likes}}</span>
+      <span class="articleLikeCount" :class="chooseLike == true ? 'el-icon-star-on' : 'el-icon-star-off'" @click="clickLike()">{{article.likes}}</span>
     </div>
     <div class="content" v-html="article.content">
     </div>
@@ -156,11 +156,6 @@ export default {
           commentList: {},
           chooseLike: false,
           comment: "",
-          reply: {
-            sysUser: {},
-            replyUser: {}
-          },
-          blogComments: {}
       }
   },
   mounted(){
@@ -168,10 +163,9 @@ export default {
     var $this = this;
 
     this.article.id = this.$route.params.articleId
-    this.$axios.get(`/article/findArticleById/${this.article.id}`)
+    this.$axios.get(`/article/watch/${this.article.id}`)
     .then(response => {
       this.article = response.data.data.article;
-      console.log(this.article);
       this.commentList = response.data.data.commentList;
       this.article.type == 1 ? this.article.type = "原创" : this.article.type="转载"
     });
@@ -281,7 +275,7 @@ export default {
       }else {
         let data = {
           "userId": 1,
-          "articleId": this.$route.params.articleId,
+          "articleId": this.article.id,
           "content": this.comment
         }
         this.$axios.post(`/comment/postComment`, JSON.stringify(data)
@@ -302,9 +296,22 @@ export default {
         });
       }
     },
-    //点击喜欢（星星）
+    //点击喜欢
     clickLike() {
-      
+        if(this.chooseLike == true){//已经点击过了
+          this.$axios.put(`/article/decreaseLikes/${this.article.id}`)
+          .then(response => {
+            this.article.likes = this.article.likes-1;
+            this.chooseLike = false;
+          });
+        }else {
+          this.$axios.put(`/article/increaseLikes/${this.article.id}`)
+          .then(response => {
+            this.article.likes = this.article.likes+1;
+            this.chooseLike = true
+          });
+        }
+      // }
     }
   },
   

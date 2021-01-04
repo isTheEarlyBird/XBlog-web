@@ -5,9 +5,11 @@ module.exports = {
     assetsDir: "assets",
     lintOnSave: false,
     devServer: {
+	
         open: false,
 		port: 8080,
 		https: false,
+
 		proxy: {
 			'api': {
 				target: 'http://localhost:8081/',
